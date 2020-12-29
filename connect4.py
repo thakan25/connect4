@@ -13,31 +13,32 @@ def check(board,a,b):
     cnt=0
     # check main diognal d1
     for i in range(-3,4):
-        for j in range(-3,4):
-            if (a+i<0 or a+i>6) or (b+j<0 or b+j>6):
-                continue
-            elif board[a+i][b+j] == curr:
-                cnt+=1
-            else :
-                cnt=0
+        if (a+i<0 or a+i>6) or (b+i<0 or b+i>6):
+            continue
+        elif board[a+i][b+i] == curr:
+            cnt+=1
+        else :
+            cnt=0
 
-            if cnt==4 :
-                return True;
+        if cnt==4 :
+            print("d1")
+            return True
 
     cnt=0
     
     # check anti diognal d2
     for i in range(3,-4,-1):
-        for j in range(-3,4):
-            if (a+i<0 or a+i>6) or (b+j<0 or b+j>6):
-                continue
-            elif board[a+i][b+j] == curr:
-                cnt+=1
-            else :
-                cnt=0
+        
+        if (a+i<0 or a+i>6) or (b-i<0 or b-i>6):
+            continue
+        elif board[a+i][b-i] == curr:
+            cnt+=1
+        else :
+            cnt=0
 
-            if cnt==4 :
-                return True;
+        if cnt==4 :
+            print("d2")
+            return True
 
     cnt=0
     #horizontal check
@@ -50,7 +51,8 @@ def check(board,a,b):
             cnt=0
 
         if cnt==4 :
-            return True;
+            print("horizontal")
+            return True
 
     cnt=0
 
@@ -64,7 +66,9 @@ def check(board,a,b):
         else :
             cnt=0
         if cnt==4 :
-            return True;
+            print("vertical")
+            return True
+        
 
     return False
 
