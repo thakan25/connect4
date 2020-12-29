@@ -21,7 +21,6 @@ def check(board,a,b):
             cnt=0
 
         if cnt==4 :
-            print("d1")
             return True
 
     cnt=0
@@ -37,7 +36,6 @@ def check(board,a,b):
             cnt=0
 
         if cnt==4 :
-            print("d2")
             return True
 
     cnt=0
@@ -51,7 +49,6 @@ def check(board,a,b):
             cnt=0
 
         if cnt==4 :
-            print("horizontal")
             return True
 
     cnt=0
@@ -66,7 +63,6 @@ def check(board,a,b):
         else :
             cnt=0
         if cnt==4 :
-            print("vertical")
             return True
         
 
