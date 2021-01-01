@@ -79,11 +79,8 @@ def display(board):
 
 def isWinning(board, pos1, pos2):
     if check(board,pos1,pos2)==True:
-        #using global copy so need to restore the state    
-     #   board[pso1][pos2]='.'
         return True
 
-    #board[pos1][pos2]='.'
     return False
     
 
@@ -94,8 +91,6 @@ def dfsAI(board,state,score,factor,level,playAI):
     #what dfs will return me ??
     # if I win in some direct move it will return me full score
     # else smone score less than that
-    
-    #localBoard=copy.deepcopy(board)
     
     #Base Case
 
@@ -125,7 +120,7 @@ def dfsAI(board,state,score,factor,level,playAI):
 
 #below is main interface for AI
 def myMove(board,state):
-    level = 6 # choose carefully
+    level = 4 # choose carefully
     #below is maximum score you can obtain from any move
     maxScore =7**(level)
     #this is dummy -INFINITY
