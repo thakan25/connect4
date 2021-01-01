@@ -157,6 +157,9 @@ def myMove(board,state):
 
 def AI_2_helper(board, state, level, player):
     #base case
+    # level = maxLevel => AI player
+    # leve = 0 => opponent
+    
     #last turn is ours so we are not making a move (worst-case)
     if level == 0:
         return 0
