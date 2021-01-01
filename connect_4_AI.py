@@ -2,7 +2,7 @@
 # lets start
 
 import copy 
-
+import random as random
 def update(board,state,curr,f):
 
     state[curr-1]+=1
@@ -120,7 +120,7 @@ def dfsAI(board,state,score,factor,level,playAI):
 
 #below is main interface for AI
 def myMove(board,state):
-    level = 4 # choose carefully
+    level = 4 # level of hardness (4 = medium , 6 = hard)
     #below is maximum score you can obtain from any move
     maxScore =7**(level)
     #this is dummy -INFINITY
@@ -155,6 +155,62 @@ def myMove(board,state):
 
     return curr
 
+def AI_2_helper(board, state, level, player):
+    #base case
+    # level = maxLevel => AI player
+    # leve = 0 => opponent
+    
+    #last turn is ours so we are not making a move (worst-case)
+    if level == 0:
+        return 0
+    
+    res = 0
+    thisMove = random.randint(1, 7)
+    thisMove -= 1
+    
+    state[thisMove] += 1
+    board[7 - state[thisMove]][thisMove] = player
+    
+    if state[thisMove] > 7 :
+        res = 0 
+    elif isWinning(board, 7 - state[thisMove], thisMove) == True:
+        res = 1 if player == 0 else -1 
+    else :
+        res = fun(board, state, level - 1, not player)
+    
+    board[7 - state[thisMove]][thisMove] = '.'
+    state[thisMove] -= 1
+    
+    return res
+    
+#below is AI_2 implementation using random moves    
+def myRandomMove(board, state):
+    score={}
+    numTrails = 100000
+    level = 10
+    
+    for i in range(numTrails) :
+        thisMove = random.randint(1, 7)
+        thisMove -= 1
+    
+        state[thisMove] += 1
+        board[7 - state[thisMove]][thisMove] = 0
+        
+        res = AI_2_helper(board, state, level - 1, 1)
+        
+        board[7 - state[thisMove]][thisMove] = '.'
+        state[thisMove] -= 1
+        
+        if score.__contains__(thisMove + 1) == True:
+            score[thisMove + 1] += res 
+        else :
+            score[thisMove + 1] =res 
+    
+    
+    ans = max(score, key=score.get)
+    
+    return ans
+
     
 #Note that the input here is by reference   
 def play(pl1,pl2,board,state):
@@ -162,6 +218,8 @@ def play(pl1,pl2,board,state):
     cnt = 0
     n= len(board)
     f=1
+    print("1 for Player 1 ")
+    print("0 for player 2 ")
     print("Instructions: Choose columns from 1 to 7 to move !!")
     print("*****Player 2 is going to be your computer opponent ******")
     while gameOver==False and cnt< n*n :
