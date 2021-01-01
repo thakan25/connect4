@@ -176,7 +176,7 @@ def AI_2_helper(board, state, level, player):
     elif isWinning(board, 7 - state[thisMove], thisMove) == True:
         res = 1 if player == 0 else -1 
     else :
-        res = fun(board, state, level - 1, not player)
+        res = AI_2_helper(board, state, level - 1, not player)
     
     board[7 - state[thisMove]][thisMove] = '.'
     state[thisMove] -= 1
@@ -231,7 +231,7 @@ def play(pl1,pl2,board,state):
             localBoard=copy.deepcopy(board)
             #we assume that given the current state of the board as localBoard
             # myMove will return us the optimal move 
-            curr= myMove(localBoard,state)
+            curr= myRandomMove(localBoard,state)
 
             print("Computer moved to",curr)
              
