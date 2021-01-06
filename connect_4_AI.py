@@ -161,12 +161,15 @@ def AI_2_helper(board, state, level, player):
     # leve = 0 => opponent
     
     #last turn is ours so we are not making a move (worst-case)
-    if level == 0:
-        return 0
+    #if level == 0:
+    #   return 0
     
     res = 0
     thisMove = random.randint(1, 7)
     thisMove -= 1
+    
+    if state[thisMove] == 7 :
+        return 0
     
     state[thisMove] += 1
     board[7 - state[thisMove]][thisMove] = player
@@ -196,7 +199,10 @@ def myRandomMove(board, state):
         state[thisMove] += 1
         board[7 - state[thisMove]][thisMove] = 0
         
-        res = AI_2_helper(board, state, level - 1, 1)
+        if isWinning(board, 7 - state[thisMove], thisMove) == True:
+            res = 1
+        else:
+            res = AI_2_helper(board, state, level - 1, 1)
         
         board[7 - state[thisMove]][thisMove] = '.'
         state[thisMove] -= 1
@@ -208,6 +214,9 @@ def myRandomMove(board, state):
     
     
     ans = max(score, key=score.get)
+    
+    for item in score.items():
+        print(item)
     
     return ans
 
